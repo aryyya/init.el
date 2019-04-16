@@ -98,6 +98,9 @@
   (setq treemacs-show-cursor t)
   (setq treemacs-width 25)
   (global-set-key (kbd "s-b") 'treemacs)
+
+  ;; diff-hl
+  (global-diff-hl-mode)
   
   )
 
@@ -112,7 +115,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (haskell-mode rainbow-delimiters treemacs paredit cider))))
+    (diff-hl haskell-mode rainbow-delimiters treemacs paredit cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
