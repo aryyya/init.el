@@ -52,11 +52,11 @@
   (setq init-file "~/.emacs.d/init.el")
 
   ;; reload init file
-  (defun init-reload ()
+  (defun reload-init ()
     (interactive)
     (load-file init-file))
 
-  (defun init-edit ()
+  (defun edit-init ()
     (interactive)
     (find-file init-file))
   
