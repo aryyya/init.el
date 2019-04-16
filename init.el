@@ -49,10 +49,16 @@
 
 (defun init-misc ()
 
+  (setq init-file "~/.emacs.d/init.el")
+
   ;; reload init file
-  (defun init ()
+  (defun init-reload ()
     (interactive)
-    (load-file "~/.emacs.d/init.el"))
+    (load-file init-file))
+
+  (defun init-edit ()
+    (interactive)
+    (find-file init-file))
   
   ;; add system paths
   (add-to-list 'exec-path "/usr/local/bin")
