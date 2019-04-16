@@ -46,6 +46,11 @@
 
 (defun init-misc ()
 
+  ;; reload init file
+  (defun init ()
+    (interactive)
+    (load-file "~/.emacs.d/init.el"))
+  
   ;; add system paths
   (add-to-list 'exec-path "/usr/local/bin")
 
@@ -76,6 +81,12 @@
   ;; show-paren
   (add-hook 'prog-mode-hook #'show-paren-mode)
 
+  ;; treemacs
+  (setq treemacs-no-png-images t)
+  (setq treemacs-show-cursor t)
+  (setq treemacs-width 25)
+  (global-set-key (kbd "s-b") 'treemacs)
+  
   )
 
 ;; execute configuration
@@ -83,9 +94,17 @@
 
 ;; emacs bookkeeping (do not hand modify the file past here)
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
     (rainbow-delimiters treemacs transpose-frame paredit cider))))
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 
