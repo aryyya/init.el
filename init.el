@@ -56,6 +56,7 @@
     (interactive)
     (load-file init-file))
 
+  ;; edit init file
   (defun edit-init ()
     (interactive)
     (find-file init-file))
@@ -65,6 +66,9 @@
 
   ;; don't word wrap
   (setq-default truncate-lines 0)
+
+  ;; use dired find alternate file key
+  (put 'dired-find-alternate-file 'disabled nil)
 
   )
 
