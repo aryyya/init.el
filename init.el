@@ -37,9 +37,6 @@
 	;; set font face
 	(set-default-font "Menlo 14")
 
-	;; show end of files in fringe
-	(toggle-indicate-empty-lines)
-
 	;; disable bell
 	(setq ring-bell-function 'ignore)
 	
