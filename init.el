@@ -10,11 +10,9 @@
   (init-misc)
   (init-package-repos)
   (init-packages)
-
   )
 
 (defun init-ui ()
-  
   (if (display-graphic-p)
       (progn
 	(toggle-scroll-bar -1)
@@ -27,7 +25,6 @@
   )
 
 (defun init-misc ()
-
   (setq init-file "~/.emacs.d/init.el")
 
   (defun load-init ()
@@ -55,7 +52,6 @@
   )
 
 (defun init-packages ()
-
   (require 'use-package)
 
   (use-package dired
