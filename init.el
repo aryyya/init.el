@@ -6,40 +6,22 @@
 ;;
 
 (defun init-emacs ()
-
-  ;; initialize the user interface
   (init-ui)
-
-  ;; initialize stuff that doesn't fit anywhere else
   (init-misc)
-
-  ;; initialize package repositories
   (init-package-repos)
-
-  ;; initialize packages
   (init-packages)
 
   )
 
 (defun init-ui ()
   
-  ;; configure settings for gui mode
   (if (display-graphic-p)
       (progn
-	
-	;; disable gui features
 	(toggle-scroll-bar -1)
 	(tool-bar-mode -1)
-
-	;; fix window gaps
 	(setq frame-resize-pixelwise t)
-
-	;; set font face
 	(set-default-font "Menlo 14")
-
-	;; disable bell
 	(setq ring-bell-function 'ignore)
-	
 	)
     )
   )
@@ -48,12 +30,10 @@
 
   (setq init-file "~/.emacs.d/init.el")
 
-  ;; reload init file
   (defun reload-init ()
     (interactive)
     (load-file init-file))
 
-  ;; edit init file
   (defun edit-init ()
     (interactive)
     (find-file init-file))
@@ -63,50 +43,59 @@
 
   ;; don't word wrap
   (setq-default truncate-lines 0)
-
-  ;; use dired find alternate file key
-  (put 'dired-find-alternate-file 'disabled nil)
-
   )
 
 (defun init-package-repos ()
-
-  ;; package initialize before configurations of installed packages
   (package-initialize)
 
   ;; add melpa repo
   (require 'package)
   (add-to-list 'package-archives
 	       '("melpa" . "https://melpa.org/packages/"))
-
   )
 
 (defun init-packages ()
 
-  ;; rainbow-delimiters
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode)
+  (require 'use-package)
 
-  ;; paredit
-  (add-hook 'clojure-mode-hook #'paredit-mode)
-  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-  (add-hook 'cider-repl-mode-hook #'paredit-mode)
+  (use-package dired
+    :config
+    (put 'dired-find-alternate-file 'disabled nil)    
+    )
 
-  ;; show-paren
-  (add-hook 'prog-mode-hook #'show-paren-mode)
+  (use-package rainbow-delimiters-mode
+    :hook
+    (prog-mode cider-repl-mode)
+    )
 
-  ;; treemacs
-  (setq treemacs-no-png-images t)
-  (setq treemacs-show-cursor t)
-  (setq treemacs-width 25)
-  (global-set-key (kbd "s-b") 'treemacs)
+  (use-package paredit-mode
+    :hook
+    (clojure-mode emacs-lisp-mode cider-repl-mode)
+    )
 
-  ;; diff-hl
-  (global-diff-hl-mode)
-  
+  (use-package show-paren-mode
+    :hook
+    (prog-mode)
+    )
+
+  (use-package treemacs
+    :config
+    (setq treemacs-no-png-images t)
+    (setq treemacs-show-cursor t)
+    (setq treemacs-width 25)
+    (global-set-key (kbd "s-b") 'treemacs)
+    )
+
+  (use-package diff-hl-mode
+    :hook
+    (prog-mode))
+
+  (use-package diff-hl-flydiff-mode
+    :hook
+    (prog-mode)
+    )
   )
 
-;; execute configuration
 (init-emacs)
 
 ;; emacs bookkeeping (do not hand modify the file past here)
@@ -117,7 +106,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (diff-hl haskell-mode rainbow-delimiters treemacs paredit cider))))
+    (use-package diff-hl haskell-mode rainbow-delimiters treemacs paredit cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
