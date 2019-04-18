@@ -30,7 +30,7 @@
 
   (setq init-file "~/.emacs.d/init.el")
 
-  (defun reload-init ()
+  (defun load-init ()
     (interactive)
     (load-file init-file))
 
